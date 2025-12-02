@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css">
+    <title>TrendZone - Responsive Fashion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    transitionProperty: {
+                        'all': 'all',
+                    }
+                }
+            }
+        }
+    </script>
+ 
+    <style>
+        /* Apply rounded corners to all elements in the grid */
+        .grid > div > div {
+            border-radius: 1.5rem !important;
+        }
+        
+
+/* Modern Hamburger */
+        .hamburger {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            padding: 10px;
+            width: 40px;
+            height: 40px;
+        }
+        
+        .hamburger span {
+            display: block;
+            width: 30px;
+            height: 2px;
+            background: #000;
+            margin: 6px 0;
+            transition: 0.3s;
+        }
+        
+        /* Fullscreen Overlay Dropdown */
+        .dropdown-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: white;
+            z-index: 999;
+        }
+        
+        .dropdown-overlay.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        /* Close Button - CENTERED */
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #111;
+            z-index: 1001;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            font-weight: 300;
+            line-height: 1;
+        }
+        
+        /* Menu Container - LEFT ALIGNED */
+        .menu-container {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+            width: 80%;
+        }
+        
+        /* Menu Items - BIG FONTS, LEFT ALIGNED */
+        .menu-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .menu-items li {
+            margin: 40px 0;
+            position: relative;
+            opacity: 0;
+            animation: slideInLeft 0.5s ease forwards;
+        }
+        .menu-items a {
+            font-size: 3rem; /* BIG FONT SIZE */
+            font-weight: 500;
+            color: #111;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            transition: all 0.3s ease;
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+        
+        /* Black Line Hover Effect */
+        .menu-items a::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: black;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .menu-items a:hover {
+            color: #333;
+            transform: translateX(10px);
+        }
+        
+        .menu-items a:hover::after {
+            transform: scaleX(1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        /* Stagger animation delays */
+        .menu-items li:nth-child(1) { animation-delay: 0.1s; }
+        .menu-items li:nth-child(2) { animation-delay: 0.2s; }
+        .menu-items li:nth-child(3) { animation-delay: 0.3s; }
+        .menu-items li:nth-child(4) { animation-delay: 0.4s; }
+        .menu-items li:nth-child(5) { animation-delay: 0.5s; }
+
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .menu-items a {
+                font-size: 4rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-container {
+                left: 5%;
+                width: 90%;
+            }
+            
+            .menu-items a {
+                font-size: 3rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .menu-items a {
+                font-size: 2.5rem;
+            }
+            
+            .menu-items li {
+                margin: 30px 0;
+            }
+        }
+        
+    
+        /* Custom clip-path with rounded edges */
+        .rounded-card {
+            clip-path: polygon(
+                93.33% 10%, 100% 15%,
+                100% 100%,
+                93.33% 95%, 100% 100%,
+                93.33% 100%,
+                0% 100%,
+                0% 95%,
+                0% 5%,
+                0% 0%,
+                46.67% 0%,
+                53.33% 5%,
+                60% 10%,
+                93.33% 10%
+            );
+            border-radius: 1.5rem;
+        } 
+        
+        .rounded-card-left {
+            clip-path: polygon(
+                6.67% 10%, 0% 15%,
+                0% 100%,
+                6.67% 95%, 0% 100%,
+                6.67% 100%,
+                100% 100%,
+                100% 95%,
+                100% 5%,
+                100% 0%,
+                53.33% 0%,
+                46.67% 5%,
+                40% 10%,
+                6.67% 10%
+            );
+            border-radius: 1.5rem;
+        }
+        
+        /* Standard rounded cards */
+        .rounded-card-normal {
+            border-radius: 1.5rem;
+        }
+        
+        /* Hide columns 2 and 4 ONLY on mobile */
+        @media (max-width: 768px) {
+            .mobile-hide {
+                display: none;
+            }
+        }
+        
+        /* Desktop-only: show ALL columns */
+        @media (min-width: 769px) {
+            .mobile-hide {
+                display: block;
+            }
+        }
+        
+        /* For small screen heights */
+        @media (max-height: 700px) {
+            body {
+                padding-bottom: 2rem;
+            }
+        }
+
+
+
+        
+    </style>
+</head>
+
+<body class="min-h-screen bg-white">
+    <!-- HEADER -->
+    <header class="w-full py-6 px-8 flex items-center justify-between">
+        <div class="text-2xl font-bold">TrendZone</div>
+
+     <button class="hamburger p-2" id="hamburger" onclick="toggleHamburger()">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+    </button>
+
+    <!-- Fullscreen Overlay Dropdown -->
+    <div class="dropdown-overlay" id="dropdown">
+        <!-- <button class="close-btn" onclick="toggleHamburger()">×</button> -->
+        <div class="menu-container">
+            <ul class="menu-items">
+                <li><a href="#" onclick="toggleHamburger()">HOME</a></li>
+                <li><a href="#" onclick="toggleHamburger()">NEW ARRIVAL</a></li>
+                <li><a href="#" onclick="toggleHamburger()">SHOP</a></li>
+                <li><a href="#" onclick="toggleHamburger()">CONTACT</a></li>
+                <li><a href="#" onclick="toggleHamburger()">ABOUT US</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    <script>
+        function toggleHamburger() {
+            const hamburger = document.getElementById('hamburger');
+            const dropdown = document.getElementById('dropdown');
+            
+            hamburger.classList.toggle('active');
+            dropdown.classList.toggle('active');
+            
+            // Animate hamburger to X
+            const spans = hamburger.querySelectorAll('span');
+            if (dropdown.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        }
+        
+        // Close dropdown when clicking outside (optional)
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('dropdown');
+            const hamburger = document.getElementById('hamburger');
+            
+            if (dropdown.classList.contains('active') && 
+                !dropdown.contains(event.target) && 
+                !hamburger.contains(event.target)) {
+                toggleHamburger();
+            }
+        });
+        
+        // Close on ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && document.getElementById('dropdown').classList.contains('active')) {
+                toggleHamburger();
+            }
+        });
+    </script>
+
+
+           
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="p-8 md:p-12">
+        <div class="grid gap-8 p-4 md:p-6" >
+            <!-- HERO SECTION -->
+            <div class="flex items-center justify-center">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-center leading-tight">
+                    Elevate Your Style With <br/> Bold Fashion
+                </h1>
+            </div>
+
+            <!-- GRID SECTION - Two States Only -->
+            <!-- Desktop: 5 columns, Mobile: 3 columns (hiding 2 and 4) -->
+            <div class="grid grid-cols-3 px-12 md:grid-cols-5 gap-6 items-end" >
+                
+                <!-- Column 1 (always visible) -->
+                <div class="grid gap-6">
+                    <div class="relative h-64 md:h-72 w-full overflow-hidden rounded-card" >
+                        <img src="fashion-orange.jpg" 
+                             class="h-full w-full object-cover scale-x-[-1]" 
+                             alt="Fashion orange" />
+                    </div>
+                    
+                    <div class="h-32 w-full overflow-hidden rounded-3xl">
+                        <img src="fashion-yellow.jpg" 
+                             class="h-full w-full object-cover scale-x-[-1]" 
+                             alt="Fashion yellow" />
+                    </div>
+                </div>
+
+                <!-- Column 2 (tall - ONLY visible on desktop - REDUCED HEIGHT) -->
+                <div class="mobile-hide relative h-80 md:h-96 w-full overflow-hidden rounded-card">
+                    <img src="fashion-green-tall.jpg" 
+                         class="object-cover w-full h-full" 
+                         alt="Fashion green tall" />
+                </div>
+
+                <!-- Column 3 (always visible) -->
+                <div class="grid gap-6">
+                    <div class="h-64 sm:50 md:h-64 w-full overflow-hidden rounded-lg">
+                        <img src="fashion-yellow-main.jpg" 
+                             class="h-full w-full object-cover scale-x-[-1]" 
+                             alt="Fashion yellow main" />
+                    </div>
+                    
+                    <div class="h-auto">
+                     <button class="w-full py-3  rounded-full bg-black text-white font-medium 
+            shadow-md hover:shadow-lg hover:bg-gray-900 active:scale-95 
+            transition-all duration-300"
+        style="font-size: clamp(0.7rem, 1.6vw, 1rem);">
+  Explore Collections
+</button>
+
+
+
+
+                    </div>
+                </div>
+
+                <!-- Column 4 (tall - ONLY visible on desktop - REDUCED HEIGHT) -->
+                <div class="mobile-hide relative h-80 md:h-96 w-full overflow-hidden rounded-card-left">
+                    <img src="fashion-blue-tall.jpg" 
+                         class="object-cover w-full h-full" 
+                         alt="Fashion blue tall" />
+                </div>
+
+                <!-- Column 5 (always visible) -->
+                <div class="grid gap-6">
+                    <div class="relative h-64 md:h-72 w-full overflow-hidden rounded-card-left">
+                        <img src="fashion-mint-top.jpg" 
+                             class="h-full w-full object-cover scale-x-[-1]" 
+                             alt="Fashion mint top" />
+                    </div>
+                    
+                    <div class="h-32 w-full overflow-hidden rounded-3xl">
+                        <img src="fashion-green-bottom.jpg" 
+                             class="h-full w-full object-cover scale-x-[-1]" 
+                             alt="Fashion green bottom" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
