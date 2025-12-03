@@ -4,12 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css">
     <title>TrendZone - Responsive Fashion</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-<script>
+    <script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -20,22 +18,22 @@
             }
         }
     </script>
- 
     <style>
-        /* Apply rounded corners to all elements in the grid */
         .grid > div > div {
             border-radius: 1.5rem !important;
         }
-         
+       
+.font-poppins {
+    font-family: 'Poppins', sans-serif;
+}
+
         
-        /* Hero Section */
         .hero {
             height: 100vh;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             justify-content: center;
             align-items: center;
-            /* padding: 40px; */
             position: relative;
             overflow: hidden;
         }
@@ -58,14 +56,9 @@
             opacity: 0.9;
         }
         
-        /* Animations */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         @keyframes slideInLeft {
@@ -79,10 +72,7 @@
             }
         }
         
-        
-        
         @media (max-width: 768px) {
-           
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -92,18 +82,6 @@
             }
         }
         
-        @media (max-width: 480px) {
-            .menu-items a {
-                font-size: 2.5rem;
-            }
-            
-            .menu-items li {
-                margin: 30px 0;
-            }
-        }
-        
-    
-        /* Custom clip-path with rounded edges */
         .rounded-card {
             clip-path: polygon(
                 93.33% 10%, 100% 15%,
@@ -140,57 +118,47 @@
             border-radius: 1.5rem;
         }
         
-        /* Standard rounded cards */
         .rounded-card-normal {
             border-radius: 1.5rem;
         }
         
-
-        
-        /* For small screen heights */
-        @media (max-height: 700px) {
-            body {
-                padding-bottom: 2rem;
-            }
+        :root {
+            --knob-transition: 260ms cubic-bezier(.2,.9,.3,1);
         }
 
+        body { 
+            font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
+        }
 
+        .knob { 
+            transition: transform var(--knob-transition); 
+            will-change: transform; 
+        }
 
+        .dropdown {
+            transition: opacity 300ms ease, transform 300ms ease;
+            opacity: 0;
+            transform: translateY(-6px);
+            pointer-events: none;
+        }
+        
+        .dropdown.open {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
 
-
-         :root {
-      --knob-transition: 260ms cubic-bezier(.2,.9,.3,1);
-    }
-
-    body { font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
-
-    /* knob movement */
-    .knob { transition: transform var(--knob-transition); will-change: transform; }
-
-    /* dropdown animation */
-    .dropdown {
-      transition: opacity 300ms ease, transform 300ms ease;
-      opacity: 0;
-      transform: translateY(-6px);
-      pointer-events: none;
-    }
-    .dropdown.open {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    /* nice underline grow effect for links */
-    .nav-link {
-      position: relative;
-      display: inline-block;
-      padding-bottom: 4px;
-      transition: transform 180ms ease;
-      font-family: "Poppins", "Inter", sans-serif;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
-    .image-card {
+        .nav-link {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 4px;
+            transition: transform 180ms ease;
+            font-family: "Poppins", "Inter", sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        
+        .image-card {
             border-radius: 20px;
             overflow: hidden;
             position: relative;
@@ -208,315 +176,260 @@
             transform: scale(1.05);
         }
         
-    .nav-link::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: -2px;
-      height: 3px;
-      width: 0%;
-      background: black;
-      border-radius: 999px;
-      transition: width 220ms cubic-bezier(.2,.9,.3,1);
-    }
-    .nav-link:hover::after,
-    .nav-link:focus::after {
-      width: 60%;
-    }
-    .nav-link:hover { transform: translateY(-3px) scale(1.01); }
+        @media (max-width: 640px) {
+            .nav-link {
+                font-size: 2.5rem !important;
+            }
+            
+            .toggle-box {
+                max-width: 280px !important;
+                width: 90% !important;
+            }
+            
+            .toggle-btn span {
+                font-size: 0.875rem;
+            }
+        }
 
-    /* subtle shadow on knob so it's readable on white */
-    .knob::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 9999px;
-      pointer-events: none;
-    }
-
-    /* accessible focus ring for the small toggle buttons */
-    .toggle-btn:focus { outline: none; }
-
-    /* Mobile responsiveness improvements */
-    @media (max-width: 640px) {
-      .nav-link {
-        font-size: 2.5rem !important;
-      }
-      
-      .toggle-box {
-        max-width: 280px !important;
-        width: 90% !important;
-      }
-      
-      .toggle-btn span {
-        font-size: 0.875rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .nav-link {
-        font-size: 2rem !important;
-      }
-      
-      .toggle-box {
-        max-width: 240px !important;
-      }
-      
-      .toggle-btn span {
-        font-size: 0.8125rem;
-      }
-    }
-
-
-        
+        @media (max-width: 480px) {
+            .nav-link {
+                font-size: 2rem !important;
+            }
+            
+            .toggle-box {
+                max-width: 240px !important;
+            }
+            
+            .toggle-btn span {
+                font-size: 0.8125rem;
+            }
+        }
     </style>
 </head>
 
 <body class="min-h-screen bg-white antialiased">
-    
-           
-        <!-- STICKY NAVBAR (centered) -->
-  <header class="sticky top-0 bg-white z-50">
-    <div class="w-full flex justify-center px-4 py-4 sm:py-5">
-      <div class="w-full flex justify-center">
-        <!-- toggle container - narrower width -->
-        <div id="toggleBox" class="toggle-box relative bg-transparent rounded-2xl flex select-none overflow-hidden border border-black/10 max-w-[320px] w-full">
-          <!-- moving black knob -->
-          <div id="knob" class="knob absolute top-1 bottom-1 left-1  w-[47.5%] bg-black rounded-xl"></div>
-
-          <!-- the two halves (clickable) -->
-          <button id="homeBtn" class="toggle-btn z-10 w-1/2 text-center py-2.5 sm:py-3 relative bg-transparent">
-            <span id="homeText" class="block text-black font-medium text-sm sm:text-base">Home</span>
-          </button>
-
-          <button id="knowBtn" class="toggle-btn z-10 w-1/2 text-center py-2.5 sm:py-3 relative bg-transparent">
-            <span id="knowText" class="block text-black font-medium text-sm sm:text-base">Know More</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-
-    <!-- FULL PAGE DROPDOWN / OVERLAY (centered content) -->
-  <div id="dropdown" class="dropdown fixed inset-0 z-40 bg-white">
-    <!-- center container -->
-<div class="flex items-center justify-center h-full px-4 sm:px-6">
-  <nav class="text-center space-y-6 sm:space-y-8">
-    <div class="flex gap-6 sm:gap-8 mb-4">
-      <button class="group px-8 py-3 text-lg font-medium text-black 
-              border border-gray-300 rounded-full hover:border-black 
-              transition-all duration-300 hover:shadow-md">
- SIGN UP
-</button>
-      
-    <button class="group px-8 py-3 text-lg font-medium text-black 
-              border border-gray-300 rounded-full hover:border-black 
-              transition-all duration-300 hover:shadow-md">
-LOG IN
-</button>
-      
-    </div>
-    
-    <a href="index1.html" target="_blank" class="nav-link block text-3xl sm:text-4xl md:text-5xl text-black">New Arrival</a>
-    <a href="#" class="nav-link block text-3xl sm:text-4xl md:text-5xl text-black">Shop Now</a>
-    <a href="#" class="nav-link block text-3xl sm:text-4xl md:text-5xl text-black">About Us</a>
-    <a href="#" class="nav-link block text-3xl sm:text-4xl md:text-5xl text-black">Contact</a>
-  </nav>
-</div>
-        
-    
-  </div>
-   
-  
-    <!-- MAIN CONTENT -->
-    <div class="p-8 md:p-12">
-        <div class="grid gap-8 p-6 md:px-12" >
-            <!-- HERO SECTION -->
-            <div class="flex items-center justify-center">
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-center leading-tight">
-                    Elevate Your Style With <br/> Bold Fashion
-                </h1>
+    <header class="sticky top-0 bg-white z-50">
+        <div class="w-full flex justify-center px-4 py-4 sm:py-5">
+            <div class="w-full flex justify-center">
+                <div id="toggleBox" class="toggle-box relative bg-transparent rounded-2xl flex select-none overflow-hidden border border-black/10 max-w-[320px] w-full">
+                    <div id="knob" class="knob absolute top-1 bottom-1 left-1  w-[47.5%] bg-black rounded-xl"></div>
+                    <button id="homeBtn" class="toggle-btn z-10 w-1/2 text-center py-2.5 sm:py-3 relative bg-transparent">
+                        <span id="homeText" class="block text-black font-medium text-sm sm:text-base">Home</span>
+                    </button>
+                    <button id="knowBtn" class="toggle-btn z-10 w-1/2 text-center py-2.5 sm:py-3 relative bg-transparent">
+                        <span id="knowText" class="block text-black font-medium text-sm sm:text-base">Know More</span>
+                    </button>
+                </div>
             </div>
-
-            <!-- GRID SECTION - Only one photo and button on mobile -->
-<div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-end">
-    
-    <!-- Desktop: Column 1 (hidden on mobile) -->
-    <div class="hidden md:grid gap-6">
-        <div class="image-card aspect-[3/4] relative h-64 md:h-72 w-full overflow-hidden rounded-card" >
-            <img src="fashion-orange.jpg" 
-                 class="h-full w-full object-cover " 
-                 alt="Fashion orange" />
         </div>
-        
-        <div class="image-card aspect-square h-32 w-full overflow-hidden rounded-3xl">
-            <img src="fashion-yellow.jpg" 
-                 class="h-full w-full object-cover " 
-                 alt="Fashion yellow" />
-        </div>
-    </div>
+    </header>
 
-    <!-- Desktop: Column 2 (hidden on mobile) -->
-    <div class="image-card hidden md:block relative h-80 md:h-96 w-full overflow-hidden rounded-card">
-        <img src="fashion-green-tall.jpg" 
-             class="object-cover w-full h-full" 
-             alt="Fashion green tall" />
-    </div>
-
-    <!-- Column 3 (visible on both mobile and desktop - ONLY this shows on mobile) -->
-    <div class="grid gap-6">
-        <div class=" image-card h-64 md:h-64 w-full overflow-hidden rounded-lg">
-            <img src="fashion-yellow-main.jpg" 
-                 class="h-full w-full object-cover" 
-                 alt="Fashion yellow main" />
-        </div>
-        
-        <!-- <div class="h-auto">
-            <button class="w-full py-3 rounded-full bg-black text-white font-medium 
-                    shadow-md hover:shadow-lg hover:bg-gray-900 active:scale-95 
-                    transition-all duration-300"
-                    style="font-size: clamp(0.7rem, 1.6vw, 1rem);">
-                Explore Collections
-            </button>
-        </div> -->
-<div class="h-auto">
-    <button class="group w-full py-3 rounded-full bg-black text-white font-medium 
-                shadow-md hover:shadow-lg hover: active:scale-95 
-                transition-all duration-300"
-            style="font-size: clamp(0.7rem, 1.6vw, 1rem);">
-        
-        <span class="flex items-center justify-center gap-2">
-            Explore Collections
-            <svg class="w-4 h-4 transition-transform duration-300 ease-out 
-                       group-hover:translate-x-1 group-hover:-translate-x-0.5" 
-                 fill="none" 
-                 stroke="currentColor" 
-                 viewBox="0 0 24 24" 
-                 xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" 
-                      stroke-linejoin="round" 
-                      stroke-width="2" 
-                      d="M14 5l7 7m0 0l-7 7m7-7H3">
-                </path>
-            </svg>
-        </span>
-    </button>
-</div>
-        
-    </div>
-
-    <!-- Desktop: Column 4 (hidden on mobile) -->
-    <div class="image-card hidden md:block relative h-80 md:h-96 w-full overflow-hidden rounded-card-left">
-        <img src="fashion-blue-tall.jpg" 
-             class="object-cover w-full h-full" 
-             alt="Fashion blue tall" />
-    </div>
-
-    <!-- Desktop: Column 5 (hidden on mobile) -->
-    <div class="hidden md:grid gap-6">
-        <div class="image-card relative h-64 md:h-72 w-full overflow-hidden rounded-card-left">
-            <img src="fashion-mint-top.jpg" 
-                 class="h-full w-full object-cover " 
-                 alt="Fashion mint top" />
-        </div>
-        
-        <div class="image-card h-32 w-full overflow-hidden rounded-3xl">
-            <img src="fashion-green-bottom.jpg" 
-                 class="h-full w-full object-cover " 
-                 alt="Fashion green bottom" />
-        </div>
-    </div>
-</div>
+    <div id="dropdown" class="dropdown fixed inset-0 z-40 bg-white">
+        <div class="flex items-center justify-center h-full px-4 sm:px-6">
+            <nav class="text-center w-full max-w-4xl">
+                <div class="flex gap-6 p-10 sm:gap-8 mb-4 justify-center">
+                    <button class="group relative px-10 py-3.5 text-lg font-medium text-black 
+                                overflow-hidden rounded-full border border-gray-300 
+                                hover:border-black transition-all duration-300">
+                        <span class="relative z-10 flex items-center">
+                            SIGN UP
+                            <svg class="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform duration-300" 
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </span>
+                        <span class="absolute inset-0  transform -translate-x-full 
+                                group-hover:translate-x-0 transition-transform duration-300 z-0"></span>
+                    </button>
+                    <button class="group relative px-10 py-3.5 text-lg font-medium text-white bg-black
+                                overflow-hidden rounded-full border border-gray-300 
+                                hover: transition-all duration-300">
+                        <span class="relative z-10 flex items-center">
+                            LOG IN
+                            <svg class="w-5 h-5 ml-2 text-white group-hover:translate-x-2 transition-transform duration-300" 
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </span>
+                        <span class="absolute inset-0  transform -translate-x-full 
+                                group-hover:translate-x-0 transition-transform duration-300 z-0"></span>
+                    </button>
+                </div>
+                
+                <div class="w-full">
+                    <a href="index1.html" target="_blank" class="nav-link group block text-3xl sm:text-4xl md:text-5xl text-black py-6 relative w-full">
+                        <span class="relative z-10">New Arrival</span>
+                        <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-500"></div>
+                    </a>
+                    <div class="h-px bg-gray-200 w-full"></div>
+                    <a href="#" class="nav-link group block text-3xl sm:text-4xl md:text-5xl text-black py-6 relative w-full">
+                        <span class="relative z-10">Shop Now</span>
+                        <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-500"></div>
+                    </a>
+                    <div class="h-px bg-gray-200 w-full"></div>
+                    <a href="#" class="nav-link group block text-3xl sm:text-4xl md:text-5xl text-black py-6 relative w-full">
+                        <span class="relative z-10">About Us</span>
+                        <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-500"></div>
+                    </a>
+                    <div class="h-px bg-gray-200 w-full"></div>
+                    <a href="#" class="nav-link group block text-3xl sm:text-4xl md:text-5xl text-black py-6 relative w-full">
+                        <span class="relative z-10">Contact</span>
+                        <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-500"></div>
+                    </a>
+                </div>
+            </nav>
         </div>
     </div>
 
+    <div class="p-8 md:p-12">
+        <div class="grid gap-8">
+            <h1 class="font-poppins text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-center leading-[0.9] tracking-tighter">
+    <span class="block bg-gradient-to-r from-gray-900 to-black bg-clip-text text-transparent">
+        Elevate Your
+    </span>
+    <span class="block bg-gradient-to-r from-purple-700 to-pink-600 bg-clip-text text-transparent mt-2 sm:mt-3">
+        Style With Bold
+    </span>
+    <span class="block bg-gradient-to-r from-gray-900 to-black bg-clip-text text-transparent mt-2 sm:mt-3">
+        Fashion
+    </span>
+</h1>
+
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-end  md:-mt-16 px-12 ">
+                <div class="hidden md:grid gap-6">
+                    <div class="image-card aspect-[3/4] relative h-64 md:h-72 w-full overflow-hidden rounded-card">
+                        <img src="fashion-orange.jpg" 
+                            class="h-full w-full object-cover" 
+                            alt="Fashion orange" />
+                    </div>
+                    <div class="image-card aspect-square h-32 w-full overflow-hidden rounded-3xl">
+                        <img src="fashion-yellow.jpg" 
+                            class="h-full w-full object-cover" 
+                            alt="Fashion yellow" />
+                    </div>
+                </div>
+
+                <div class="image-card hidden md:block relative h-80 md:h-96 w-full overflow-hidden rounded-card">
+                    <img src="fashion-green-tall.jpg" 
+                        class="object-cover w-full h-full" 
+                        alt="Fashion green tall" />
+                </div>
+
+                <div class="grid gap-6">
+                    <div class="image-card h-64 md:h-64 w-full overflow-hidden rounded-lg">
+                        <img src="fashion-yellow-main.jpg" 
+                            class="h-full w-full object-cover" 
+                            alt="Fashion yellow main" />
+                    </div>
+                    <div class="h-auto">
+                        <button class="group w-full py-3 rounded-full bg-black text-white font-medium 
+                                    shadow-md hover:shadow-lg hover: active:scale-95 
+                                    transition-all duration-300"
+                                style="font-size: clamp(0.7rem, 1.6vw, 1rem);">
+                            <span class="flex items-center justify-center gap-2">
+                                Explore Collections
+                                <svg class="w-4 h-4 transition-transform duration-300 ease-out 
+                                        group-hover:translate-x-1 group-hover:-translate-x-0.5" 
+                                    fill="none" 
+                                    stroke="currentColor" 
+                                    viewBox="0 0 24 24" 
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" 
+                                        stroke-linejoin="round" 
+                                        stroke-width="2" 
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3">
+                                    </path>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="image-card hidden md:block relative h-80 md:h-96 w-full overflow-hidden rounded-card-left">
+                    <img src="fashion-blue-tall.jpg" 
+                        class="object-cover w-full h-full" 
+                        alt="Fashion blue tall" />
+                </div>
+
+                <div class="hidden md:grid gap-6">
+                    <div class="image-card relative h-64 md:h-72 w-full overflow-hidden rounded-card-left">
+                        <img src="fashion-mint-top.jpg" 
+                            class="h-full w-full object-cover" 
+                            alt="Fashion mint top" />
+                    </div>
+                    <div class="image-card h-32 w-full overflow-hidden rounded-3xl">
+                        <img src="fashion-green-bottom.jpg" 
+                            class="h-full w-full object-cover" 
+                            alt="Fashion green bottom" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
-    // state
-    let open = false; // false = Home (default)
+        let open = false;
+        const knob = document.getElementById('knob');
+        const homeBtn = document.getElementById('homeBtn');
+        const knowBtn = document.getElementById('knowBtn');
+        const homeText = document.getElementById('homeText');
+        const knowText = document.getElementById('knowText');
+        const dropdown = document.getElementById('dropdown');
 
-    // elements
-    const knob = document.getElementById('knob');
-    const homeBtn = document.getElementById('homeBtn');
-    const knowBtn = document.getElementById('knowBtn');
-    const homeText = document.getElementById('homeText');
-    const knowText = document.getElementById('knowText');
-    const dropdown = document.getElementById('dropdown');
-
-    // update UI function
-    function setState(isOpen) {
-      open = !!isOpen;
-      if (open) {
-        // slide knob to the right
-        knob.style.transform = 'translateX(105%)';
-        // active text on the knob (white on black)
-        knowText.classList.remove('text-black'); knowText.classList.add('text-white');
-        homeText.classList.remove('text-white'); homeText.classList.add('text-black');
-
-        // show dropdown with animation
-        dropdown.classList.add('open');
-
-        // Prevent scrolling when dropdown is open
-        document.body.style.overflow = 'hidden';
-
-      } else {
-        // slide knob to left
-        knob.style.transform = 'translateX(0%)';
-        // Home active visually
-        homeText.classList.remove('text-black'); homeText.classList.add('text-white');
-        knowText.classList.remove('text-white'); knowText.classList.add('text-black');
-
-        // hide dropdown
-        dropdown.classList.remove('open');
-
-        // Restore scrolling
-        document.body.style.overflow = 'auto';
-      }
-    }
-
-    // initialize (Home active)
-    setState(false);
-
-    // handlers
-    homeBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      setState(!open);
-    });
-
-    knowBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      setState(!open);
-    });
-
-    // close when clicking background (outside centered nav)
-    dropdown.addEventListener('click', (e) => {
-      // if user clicks the overlay area (not the centered nav), close.
-      if (e.target === dropdown) setState(false);
-    });
-
-    // close on Esc
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && open) setState(false);
-    });
-
-    // improve keyboard accessibility: allow toggling with Enter/Space when focused
-    [homeBtn, knowBtn].forEach(btn => {
-      btn.addEventListener('keydown', (ev) => {
-        if (ev.key === 'Enter' || ev.key === ' ') {
-          ev.preventDefault();
-          btn.click();
+        function setState(isOpen) {
+            open = !!isOpen;
+            if (open) {
+                knob.style.transform = 'translateX(105%)';
+                knowText.classList.remove('text-black'); knowText.classList.add('text-white');
+                homeText.classList.remove('text-white'); homeText.classList.add('text-black');
+                dropdown.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            } else {
+                knob.style.transform = 'translateX(0%)';
+                homeText.classList.remove('text-black'); homeText.classList.add('text-white');
+                knowText.classList.remove('text-white'); knowText.classList.add('text-black');
+                dropdown.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            }
         }
-      });
-    });
 
-    // Close dropdown on mobile when clicking a link (optional)
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
         setState(false);
-      });
-    });
-  </script>
+
+        homeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            setState(!open);
+        });
+
+        knowBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            setState(!open);
+        });
+
+        dropdown.addEventListener('click', (e) => {
+            if (e.target === dropdown) setState(false);
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && open) setState(false);
+        });
+
+        [homeBtn, knowBtn].forEach(btn => {
+            btn.addEventListener('keydown', (ev) => {
+                if (ev.key === 'Enter' || ev.key === ' ') {
+                    ev.preventDefault();
+                    btn.click();
+                }
+            });
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                setState(false);
+            });
+        });
+    </script>
 </body>
 </html>
