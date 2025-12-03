@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css">
+    <title>TrendZone - Responsive Fashion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    transitionProperty: {
+                        'all': 'all',
+                    }
+                }
+            }
+        }
+    </script>
+ 
+    <style>
+        /* Apply rounded corners to all elements in the grid */
+        .grid > div > div {
+            border-radius: 1.5rem !important;
+        }
+         
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* padding: 40px; */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        
+        
+        @media (max-width: 768px) {
+           
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .menu-items a {
+                font-size: 2.5rem;
+            }
+            
+            .menu-items li {
+                margin: 30px 0;
+            }
+        }
+        
+    
+        /* Custom clip-path with rounded edges */
+        .rounded-card {
+            clip-path: polygon(
+                93.33% 10%, 100% 15%,
+                100% 100%,
+                93.33% 95%, 100% 100%,
+                93.33% 100%,
+                0% 100%,
+                0% 95%,
+                0% 5%,
+                0% 0%,
+                46.67% 0%,
+                53.33% 5%,
+                60% 10%,
+                93.33% 10%
+            );
+            border-radius: 1.5rem;
+        } 
+        
+        .rounded-card-left {
+            clip-path: polygon(
+                6.67% 10%, 0% 15%,
+                0% 100%,
+                6.67% 95%, 0% 100%,
+                6.67% 100%,
+                100% 100%,
+                100% 95%,
+                100% 5%,
+                100% 0%,
+                53.33% 0%,
+                46.67% 5%,
+                40% 10%,
+                6.67% 10%
+            );
+            border-radius: 1.5rem;
+        }
+        
+        /* Standard rounded cards */
+        .rounded-card-normal {
+            border-radius: 1.5rem;
+        }
+        
+
+        
+        /* For small screen heights */
+        @media (max-height: 700px) {
+            body {
+                padding-bottom: 2rem;
+            }
+        }
+
+
+
+
+
+         :root {
+      --knob-transition: 260ms cubic-bezier(.2,.9,.3,1);
+    }
+
+    body { font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+
+    /* knob movement */
+    .knob { transition: transform var(--knob-transition); will-change: transform; }
+
+    /* nice underline grow effect for links */
+    .nav-link {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 4px;
+      transition: transform 180ms ease;
+      font-family: "Poppins", "Inter", sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .image-card {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            background: #f5f5f5;
+        }
+        
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .image-card:hover img {
+            transform: scale(1.05);
+        }
+        
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -2px;
+      height: 3px;
+      width: 0%;
+      background: black;
+      border-radius: 999px;
+      transition: width 220ms cubic-bezier(.2,.9,.3,1);
+    }
+    .nav-link:hover::after,
+    .nav-link:focus::after {
+      width: 60%;
+    }
+    .nav-link:hover { transform: translateY(-3px) scale(1.01); }
+
+    /* subtle shadow on knob so it's readable on white */
+    .knob::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      pointer-events: none;
+    }
+
+    /* accessible focus ring for the small toggle buttons */
+    .toggle-btn:focus { outline: none; }
+
+    /* Centered dropdown animations */
+    .dropdown-slide {
+      position: fixed;
+      top: 80px; /* Position right below navbar */
+      left: 0;
+      right: 0;
+      z-index: 40;
+      transform: translateY(-20px) scale(0.95);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: none;
+    }
+    
+    .dropdown-slide.open {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    /* Mobile responsiveness improvements */
+    @media (max-width: 640px) {
+      .nav-link {
+        font-size: 2.5rem !important;
+      }
+      
+      .toggle-box {
+        max-width: 280px !important;
+        width: 90% !important;
+      }
+      
+      .toggle-btn span {
+        font-size: 0.875rem;
+      }
+      
+      .dropdown-card {
+        width: 95% !important;
+        margin-left: 2.5% !important;
+        margin-right: 2.5% !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-link {
+        font-size: 2rem !important;
+      }
+      
+      .toggle-box {
+        max-width: 240px !important;
+      }
+      
+      .toggle-btn span {
+        font-size: 0.8125rem;
+      }
+    }
+
+    /* Nav link hover animation - slick design */
+    .dropdown-link {
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border-radius: 5px;
+      padding: 16px 24px;
+      margin: 4px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .dropdown-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+      transition: left 0.7s ease;
+    }
+    
+    .dropdown-link:hover::before {
+      left: 100%;
+    }
+    
+    .dropdown-link:hover {
+      background-color: #000;
+      color: white !important;
+      /* transform: translateX(12px); */
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    .dropdown-link .arrow {
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown-link:hover .arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+        
+    </style>
+</head>
+
+<body class="min-h-screen bg-white antialiased">
+    
+           
+        <!-- STICKY NAVBAR (centered) -->
+  <header class="sticky top-0 bg-white z-50">
+    <div class="w-full flex justify-center px-4 py-4 sm:py-5">
+      <div class="w-full flex justify-center">
+        <!-- toggle container - narrower width -->
+        <div id="toggleBox" class="toggle-box relative bg-transparent rounded-2xl flex select-none overflow-hidden border border-black/10 max-w-[320px] w-full">
+          <!-- moving black knob -->
+          <div id="knob" class="knob absolute top-1 bottom-1 left-1  w-[47.5%] bg-black rounded-xl"></div>
+
+          <!-- the two halves (clickable) -->
+          <button id="homeBtn" class="toggle-btn z-10 w-1/2 text-center py-2.5 sm:py-3 relative bg-transparent">
+            <span id="homeText" class="block text-black font-medium text-sm sm:text-base">Home</span>
+          </button>
+
+          <button id="knowBtn" class="toggle-btn z-10 w-1/2 text-center py-2.5 sm:py-3 relative bg-transparent">
+            <span id="knowText" class="block text-black font-medium text-sm sm:text-base">Know More</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Centered dropdown that appears below navbar -->
+  <div id="dropdown" class="dropdown-slide">
+    <div class="flex justify-center px-4">
+      <div class="dropdown-card bg-white rounded-xl shadow-2xl p-5 w-full max-w-md border border-gray-100">
+        
+        <!-- Auth buttons with modern design -->
+        <div class="grid grid-cols-2 gap-4 mb-8">
+             <button class="group px-8 py-3 text-lg font-medium text-black 
+              border border-gray-300 rounded-full hover:border-black 
+              transition-all duration-300 hover:shadow-md">
+ SIGN UP
+</button>
+      
+    <button class="group px-8 py-3 text-lg font-medium text-black 
+              border border-gray-300 rounded-full hover:border-black 
+              transition-all duration-300 hover:shadow-md">
+LOG IN
+</button>
+      
+         
+        </div>
+        
+        <!-- Links with slick hover animation -->
+        <div class="space-y-2 border-t border-gray-100 ">
+          <a href="#" class="dropdown-link block text-xl text-gray-800 hover:text-white 
+                            transition-all duration-400 flex items-center justify-between">
+            <span>New Arrival</span>
+            <svg class="arrow w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+          
+          <a href="#" class="dropdown-link block text-xl text-gray-800 hover:text-white 
+                            transition-all duration-400 flex items-center justify-between">
+            <span>Shop Now</span>
+            <svg class="arrow w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+          
+          <a href="#" class="dropdown-link block text-xl text-gray-800 hover:text-white 
+                            transition-all duration-400 flex items-center justify-between">
+            <span>About Us</span>
+            <svg class="arrow w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+          
+          <a href="#" class="dropdown-link block text-xl text-gray-800 hover:text-white 
+                            transition-all duration-400 flex items-center justify-between">
+            <span>Contact</span>
+            <svg class="arrow w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Subtle shine effect on card edges -->
+        <div class="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
+          <div class="absolute -inset-1 bg-gradient-to-r from-transparent via-white/5 to-transparent 
+                      opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    <!-- MAIN CONTENT -->
+    <div class="p-8 md:p-12">
+        <div class="grid gap-8 p-6 md:px-12" >
+            <!-- HERO SECTION -->
+            <div class="flex items-center justify-center">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-center leading-tight">
+                    Elevate Your Style With <br/> Bold Fashion
+                </h1>
+            </div>
+
+            <!-- GRID SECTION - Only one photo and button on mobile -->
+<div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-end">
+    
+    <!-- Desktop: Column 1 (hidden on mobile) -->
+    <div class="hidden md:grid gap-6">
+        <div class="image-card aspect-[3/4] relative h-64 md:h-72 w-full overflow-hidden rounded-card" >
+            <img src="fashion-orange.jpg" 
+                 class="h-full w-full object-cover " 
+                 alt="Fashion orange" />
+        </div>
+        
+        <div class="image-card aspect-square h-32 w-full overflow-hidden rounded-3xl">
+            <img src="fashion-yellow.jpg" 
+                 class="h-full w-full object-cover " 
+                 alt="Fashion yellow" />
+        </div>
+    </div>
+
+    <!-- Desktop: Column 2 (hidden on mobile) -->
+    <div class="image-card hidden md:block relative h-80 md:h-96 w-full overflow-hidden rounded-card">
+        <img src="fashion-green-tall.jpg" 
+             class="object-cover w-full h-full" 
+             alt="Fashion green tall" />
+    </div>
+
+    <!-- Column 3 (visible on both mobile and desktop - ONLY this shows on mobile) -->
+    <div class="grid gap-6">
+        <div class=" image-card h-64 md:h-64 w-full overflow-hidden rounded-lg">
+            <img src="fashion-yellow-main.jpg" 
+                 class="h-full w-full object-cover" 
+                 alt="Fashion yellow main" />
+        </div>
+        
+<div class="h-auto">
+    <button class="group w-full py-3 rounded-full bg-black text-white font-medium 
+                shadow-md hover:shadow-lg hover: active:scale-95 
+                transition-all duration-300"
+            style="font-size: clamp(0.7rem, 1.6vw, 1rem);">
+        
+        <span class="flex items-center justify-center gap-2">
+            Explore Collections
+            <svg class="w-4 h-4 transition-transform duration-300 ease-out 
+                       group-hover:translate-x-1 group-hover:-translate-x-0.5" 
+                 fill="none" 
+                 stroke="currentColor" 
+                 viewBox="0 0 24 24" 
+                 xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" 
+                      stroke-linejoin="round" 
+                      stroke-width="2" 
+                      d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+            </svg>
+        </span>
+    </button>
+</div>
+        
+    </div>
+
+    <!-- Desktop: Column 4 (hidden on mobile) -->
+    <div class="image-card hidden md:block relative h-80 md:h-96 w-full overflow-hidden rounded-card-left">
+        <img src="fashion-blue-tall.jpg" 
+             class="object-cover w-full h-full" 
+             alt="Fashion blue tall" />
+    </div>
+
+    <!-- Desktop: Column 5 (hidden on mobile) -->
+    <div class="hidden md:grid gap-6">
+        <div class="image-card relative h-64 md:h-72 w-full overflow-hidden rounded-card-left">
+            <img src="fashion-mint-top.jpg" 
+                 class="h-full w-full object-cover " 
+                 alt="Fashion mint top" />
+        </div>
+        
+        <div class="image-card h-32 w-full overflow-hidden rounded-3xl">
+            <img src="fashion-green-bottom.jpg" 
+                 class="h-full w-full object-cover " 
+                 alt="Fashion green bottom" />
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+
+
+    <script>
+    // state
+    let open = false; // false = Home (default)
+
+    // elements
+    const knob = document.getElementById('knob');
+    const homeBtn = document.getElementById('homeBtn');
+    const knowBtn = document.getElementById('knowBtn');
+    const homeText = document.getElementById('homeText');
+    const knowText = document.getElementById('knowText');
+    const dropdown = document.getElementById('dropdown');
+
+    // update UI function
+    function setState(isOpen) {
+      open = !!isOpen;
+      
+      if (open) {
+        // slide knob to the right
+        knob.style.transform = 'translateX(105%)';
+        // active text on the knob (white on black)
+        knowText.classList.remove('text-black'); 
+        knowText.classList.add('text-white');
+        homeText.classList.remove('text-white'); 
+        homeText.classList.add('text-black');
+
+        // Show dropdown with animation
+        dropdown.classList.add('open');
+
+      } else {
+        // slide knob to left
+        knob.style.transform = 'translateX(0%)';
+        // Home active visually
+        homeText.classList.remove('text-black'); 
+        homeText.classList.add('text-white');
+        knowText.classList.remove('text-white'); 
+        knowText.classList.add('text-black');
+
+        // Hide dropdown with animation
+        dropdown.classList.remove('open');
+      }
+    }
+
+    // initialize (Home active)
+    setState(false);
+
+    // handlers
+    homeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      setState(!open);
+    });
+
+    knowBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      setState(!open);
+    });
+
+    // Close on Esc
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && open) setState(false);
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      const dropdownCard = document.querySelector('.dropdown-card');
+      if (open && !dropdownCard.contains(e.target) && 
+          e.target !== knowBtn && e.target !== knowText &&
+          e.target !== homeBtn && e.target !== homeText) {
+        setState(false);
+      }
+    });
+
+    // improve keyboard accessibility: allow toggling with Enter/Space when focused
+    [homeBtn, knowBtn].forEach(btn => {
+      btn.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Enter' || ev.key === ' ') {
+          ev.preventDefault();
+          btn.click();
+        }
+      });
+    });
+
+    // Close dropdown when clicking a link inside the dropdown
+    document.querySelectorAll('.dropdown-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        setState(false);
+      });
+    });
+  </script>
+</body>
+</html>
