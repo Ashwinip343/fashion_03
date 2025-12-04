@@ -360,13 +360,13 @@
         
         <!-- Auth buttons with modern design -->
         <div class="grid grid-cols-2 gap-4 mb-8">
-             <button class="group px-8 py-3 text-lg font-medium text-black 
+            <button class="group px-8 py-3 text-lg font-medium text-black 
               border border-gray-300 rounded-full hover:border-black 
               transition-all duration-300 hover:shadow-md">
  SIGN UP
 </button>
       
-    <button class="group px-8 py-3 text-lg font-medium text-black 
+    <button class="group px-8 py-3 text-lg font-medium text-white bg-black
               border border-gray-300 rounded-full hover:border-black 
               transition-all duration-300 hover:shadow-md">
 LOG IN
@@ -433,10 +433,10 @@ LOG IN
                 </h1>
             </div>
 
-            <!-- GRID SECTION - Only one photo and button on mobile -->
-<div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-end">
+            <!-- GRID SECTION - Responsive across three breakpoints -->
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 items-end">
     
-    <!-- Desktop: Column 1 (hidden on mobile) -->
+    <!-- Column 1: Hidden on mobile, shows on medium and large -->
     <div class="hidden md:grid gap-6">
         <div class="image-card aspect-[3/4] relative h-64 md:h-72 w-full overflow-hidden rounded-card" >
             <img src="fashion-orange.jpg" 
@@ -451,16 +451,16 @@ LOG IN
         </div>
     </div>
 
-    <!-- Desktop: Column 2 (hidden on mobile) -->
-    <div class="image-card hidden md:block relative h-80 md:h-96 w-full overflow-hidden rounded-card">
+    <!-- Column 2: Hidden on mobile AND medium, shows only on large -->
+    <div class="image-card hidden lg:block relative h-80 md:h-96 w-full overflow-hidden rounded-card">
         <img src="fashion-green-tall.jpg" 
              class="object-cover w-full h-full" 
              alt="Fashion green tall" />
     </div>
 
-    <!-- Column 3 (visible on both mobile and desktop - ONLY this shows on mobile) -->
+    <!-- Column 3: Visible on ALL screen sizes (mobile, medium, large) -->
     <div class="grid gap-6">
-        <div class=" image-card h-64 md:h-64 w-full overflow-hidden rounded-lg">
+        <div class="image-card h-64 md:h-64 w-full overflow-hidden rounded-lg">
             <img src="fashion-yellow-main.jpg" 
                  class="h-full w-full object-cover" 
                  alt="Fashion yellow main" />
@@ -492,14 +492,14 @@ LOG IN
         
     </div>
 
-    <!-- Desktop: Column 4 (hidden on mobile) -->
-    <div class="image-card hidden md:block relative h-80 md:h-96 w-full overflow-hidden rounded-card-left">
+    <!-- Column 4: Hidden on mobile AND medium, shows only on large -->
+    <div class="image-card hidden lg:block relative h-80 md:h-96 w-full overflow-hidden rounded-card-left">
         <img src="fashion-blue-tall.jpg" 
              class="object-cover w-full h-full" 
              alt="Fashion blue tall" />
     </div>
 
-    <!-- Desktop: Column 5 (hidden on mobile) -->
+    <!-- Column 5: Hidden on mobile, shows on medium and large -->
     <div class="hidden md:grid gap-6">
         <div class="image-card relative h-64 md:h-72 w-full overflow-hidden rounded-card-left">
             <img src="fashion-mint-top.jpg" 
